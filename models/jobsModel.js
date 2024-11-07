@@ -1,33 +1,37 @@
 import mongoose from "mongoose";
-const jobSchema = new mongoose.Schema({
+
+const jobSchema = new mongoose.Schema(
+  {
     company: {
-        type: String,
-        required: [true, "Company name is required"]
+      type: String,
+      requied: [true, "Companay name is require"],
     },
-    position: {  // corrected spelling
-        type: String,
-        required: [true, "Position is required"],
-        minlength: 2,  // adjusted minlength
+    position: {
+      type: String,
+      required: [true, "Job Position is required"],
+      maxlength: 100,
     },
     status: {
-        type: String,
-        enum: ["pending", "reject", "interview"],
-        default: "pending"
+      type: String,
+      enum: ["pending", "reject", "interview"],
+      default: "pending",
     },
-    WorkType: {
-        type: String,
-        enum: ["full-time", "part-time", "internship", "contract"],  // corrected spelling
-        default: "full-time"
+    workType: {
+      type: String,
+      enum: ["full-time", "part-time", "internship", "contaract"],
+      default: "full-time",
     },
     workLocation: {
-        type: String,
-        default: "Mumbai",
-        required: [true, "Work location is required"]
+      type: String,
+      default: "Mumbai",
+      required: [true, "Work location is required"],
     },
     createdBy: {
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
-    }
-}, { timestamps: true });  // added timestamps option
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  { timestamps: true }
+);
 
 export default mongoose.model("Job", jobSchema);
